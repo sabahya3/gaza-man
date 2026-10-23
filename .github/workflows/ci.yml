@@ -1,0 +1,21 @@
+# Runs the tests on every push and pull request.
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Linux libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libxkbcommon-dev libxcb-render0-dev \
+            libxcb-shape0-dev libxcb-xfixes0-dev libwayland-dev pkg-config
+      - run: cargo test

@@ -1,0 +1,108 @@
+# Builds Gaza Man for Windows, Linux and macOS, and publishes the files on a GitHub Release.
+# Runs when a version tag (v2.0.0, v2.1.0, …) is pushed, or by hand from the Actions tab.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: windows-x86_64
+            os: windows-latest
+          - name: linux-x86_64
+            # An older Ubuntu, so the build runs on older Linux versions too.
+            os: ubuntu-22.04
+          - name: macos-universal
+            os: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.os == 'macos-14' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Linux libraries (windowing, file dialogs)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libxkbcommon-dev libxcb-render0-dev \
+            libxcb-shape0-dev libxcb-xfixes0-dev libwayland-dev pkg-config
+
+      - name: Version
+        id: version
+        shell: bash
+        run: echo "v=$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)" >> "$GITHUB_OUTPUT"
+
+      - name: Build and package (Windows)
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          cargo build --release
+          mkdir -p dist/Gaza-Man
+          cp target/release/gaza-man.exe "dist/Gaza-Man/Gaza Man.exe"
+          cp README.md dist/Gaza-Man/
+          cd dist && 7z a "Gaza-Man-${{ steps.version.outputs.v }}-windows-x86_64.zip" Gaza-Man
+
+      - name: Build and package (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          cargo build --release
+          mkdir -p dist/gaza-man
+          cp target/release/gaza-man dist/gaza-man/
+          cp packaging/linux/gaza-man.desktop dist/gaza-man/
+          cp assets/icon-512.png dist/gaza-man/gaza-man.png
+          cp README.md dist/gaza-man/
+          tar -C dist -czf "dist/Gaza-Man-${{ steps.version.outputs.v }}-linux-x86_64.tar.gz" gaza-man
+
+      - name: Build and package (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          ./make-app.sh universal
+          # An ad-hoc signature, so Apple Silicon Macs will run it.
+          codesign --force --deep --sign - "Gaza Man.app"
+          mkdir -p dist
+          ditto -c -k --keepParent "Gaza Man.app" "dist/Gaza-Man-${{ steps.version.outputs.v }}-macos-universal.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: |
+            dist/*.zip
+            dist/*.tar.gz
+          if-no-files-found: error
+
+  release:
+    name: Publish the release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true
+          body: |
+            ## Download
+
+            | System | File |
+            |---|---|
+            | Windows 10 / 11 | `Gaza-Man-*-windows-x86_64.zip`: unzip, then open **Gaza Man.exe** |
+            | macOS 11+ (Apple Silicon and Intel) | `Gaza-Man-*-macos-universal.zip`: unzip, move **Gaza Man.app** to Applications, then right-click → **Open** the first time |
+            | Linux (x86_64) | `Gaza-Man-*-linux-x86_64.tar.gz`: extract, then run `./gaza-man` |

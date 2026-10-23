@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Gaza Man
+Comment=A simple API client: send requests, test APIs and teach HTTP
+Exec=gaza-man %f
+Icon=gaza-man
+Terminal=false
+Categories=Development;Network;
+Keywords=api;http;rest;postman;graphql;websocket;
