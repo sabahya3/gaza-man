@@ -8,7 +8,7 @@ Collections, environments, tests, JavaScript scripts, GraphQL, WebSocket and Soc
 </p>
 
 <p align="center">
-<a href="https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-windows-x86_64.zip"><img alt="Download for Windows" src="https://img.shields.io/badge/Download_for-Windows-0078D6?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMy40IDkuOCAydjkuNUgwek0xMSAxLjggMjQgMHYxMS41SDExek0wIDEyLjVoOS44VjIyTDAgMjAuNnpNMTEgMTIuNWgxM1YyNGwtMTMtMS44eiIvPjwvc3ZnPg=="></a>
+<a href="https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-Setup-windows-x86_64.exe"><img alt="Download for Windows" src="https://img.shields.io/badge/Download_for-Windows-0078D6?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMy40IDkuOCAydjkuNUgwek0xMSAxLjggMjQgMHYxMS41SDExek0wIDEyLjVoOS44VjIyTDAgMjAuNnpNMTEgMTIuNWgxM1YyNGwtMTMtMS44eiIvPjwvc3ZnPg=="></a>
 <a href="https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-macos-universal.zip"><img alt="Download for macOS" src="https://img.shields.io/badge/Download_for-macOS-111111?style=for-the-badge&logo=apple&logoColor=white"></a>
 <a href="https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-linux-x86_64.tar.gz"><img alt="Download for Linux" src="https://img.shields.io/badge/Download_for-Linux-E95420?style=for-the-badge&logo=linux&logoColor=white"></a>
 </p>
@@ -30,7 +30,8 @@ Collections, environments, tests, JavaScript scripts, GraphQL, WebSocket and Soc
 
 | النظام | الملف | التشغيل |
 |---|---|---|
-| **Windows** 10 / 11 | [`Gaza-Man-windows-x86_64.zip`](https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-windows-x86_64.zip) | فك الضغط وافتح **Gaza Man.exe** |
+| **Windows** 10 / 11 | [`Gaza-Man-Setup-windows-x86_64.exe`](https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-Setup-windows-x86_64.exe) | برنامج التثبيت: افتحه واضغط Next. بيعمل أيقونة في الـ Start menu، وتقدر تشيله من الإعدادات زي أي برنامج. مش محتاج صلاحيات Admin |
+| **Windows** من غير تثبيت | [`Gaza-Man-windows-x86_64.exe`](https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-windows-x86_64.exe) | ملف واحد، تفتحه على طول من غير تثبيت (portable) |
 | **macOS** 11+ (Apple Silicon و Intel) | [`Gaza-Man-macos-universal.zip`](https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-macos-universal.zip) | فك الضغط وانقل **Gaza Man.app** لـ Applications. أول مرة اعمل كليك يمين ← **Open**، لأن التطبيق مش موقّع من Apple |
 | **Linux** (x86_64) | [`Gaza-Man-linux-x86_64.tar.gz`](https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-linux-x86_64.tar.gz) | فك الضغط وشغّل `./gaza-man`. محتاج GTK 3 (موجود في أغلب التوزيعات) |
 

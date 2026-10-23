@@ -46,15 +46,27 @@ jobs:
         shell: bash
         run: echo "v=$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)" >> "$GITHUB_OUTPUT"
 
-      - name: Build and package (Windows)
+      - name: Build (Windows)
         if: runner.os == 'Windows'
         shell: bash
         run: |
           cargo build --release
-          mkdir -p dist/Gaza-Man
-          cp target/release/gaza-man.exe "dist/Gaza-Man/Gaza Man.exe"
-          cp README.md LICENSE dist/Gaza-Man/
-          cd dist && 7z a "Gaza-Man-windows-x86_64.zip" Gaza-Man
+          mkdir -p dist
+          cp target/release/gaza-man.exe dist/gaza-man.exe
+          # The portable version: one file, no installing.
+          cp target/release/gaza-man.exe dist/Gaza-Man-windows-x86_64.exe
+
+      - name: Installer (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) {
+            choco install innosetup --no-progress -y
+          }
+          & $iscc "/DAppVersion=${{ steps.version.outputs.v }}" packaging\windows\gaza-man.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Remove-Item dist\gaza-man.exe
 
       - name: Build and package (Linux)
         if: runner.os == 'Linux'
@@ -82,6 +94,7 @@ jobs:
           path: |
             dist/*.zip
             dist/*.tar.gz
+            dist/*.exe
           if-no-files-found: error
 
   release:
@@ -103,6 +116,7 @@ jobs:
 
             | System | File |
             |---|---|
-            | Windows 10 / 11 | `Gaza-Man-windows-x86_64.zip`: unzip, then open **Gaza Man.exe** |
+            | Windows 10 / 11 | `Gaza-Man-Setup-windows-x86_64.exe`: the installer (Start menu, uninstall, no admin rights needed) |
+            | Windows 10 / 11, no install | `Gaza-Man-windows-x86_64.exe`: one file, just run it |
             | macOS 11+ (Apple Silicon and Intel) | `Gaza-Man-macos-universal.zip`: unzip, move **Gaza Man.app** to Applications, then right-click → **Open** the first time |
             | Linux (x86_64) | `Gaza-Man-linux-x86_64.tar.gz`: extract, then run `./gaza-man` |
