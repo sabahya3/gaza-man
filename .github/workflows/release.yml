@@ -53,8 +53,8 @@ jobs:
           cargo build --release
           mkdir -p dist/Gaza-Man
           cp target/release/gaza-man.exe "dist/Gaza-Man/Gaza Man.exe"
-          cp README.md dist/Gaza-Man/
-          cd dist && 7z a "Gaza-Man-${{ steps.version.outputs.v }}-windows-x86_64.zip" Gaza-Man
+          cp README.md LICENSE dist/Gaza-Man/
+          cd dist && 7z a "Gaza-Man-windows-x86_64.zip" Gaza-Man
 
       - name: Build and package (Linux)
         if: runner.os == 'Linux'
@@ -64,8 +64,8 @@ jobs:
           cp target/release/gaza-man dist/gaza-man/
           cp packaging/linux/gaza-man.desktop dist/gaza-man/
           cp assets/icon-512.png dist/gaza-man/gaza-man.png
-          cp README.md dist/gaza-man/
-          tar -C dist -czf "dist/Gaza-Man-${{ steps.version.outputs.v }}-linux-x86_64.tar.gz" gaza-man
+          cp README.md LICENSE dist/gaza-man/
+          tar -C dist -czf "dist/Gaza-Man-linux-x86_64.tar.gz" gaza-man
 
       - name: Build and package (macOS)
         if: runner.os == 'macOS'
@@ -74,7 +74,7 @@ jobs:
           # An ad-hoc signature, so Apple Silicon Macs will run it.
           codesign --force --deep --sign - "Gaza Man.app"
           mkdir -p dist
-          ditto -c -k --keepParent "Gaza Man.app" "dist/Gaza-Man-${{ steps.version.outputs.v }}-macos-universal.zip"
+          ditto -c -k --keepParent "Gaza Man.app" "dist/Gaza-Man-macos-universal.zip"
 
       - uses: actions/upload-artifact@v4
         with:
@@ -103,6 +103,6 @@ jobs:
 
             | System | File |
             |---|---|
-            | Windows 10 / 11 | `Gaza-Man-*-windows-x86_64.zip`: unzip, then open **Gaza Man.exe** |
-            | macOS 11+ (Apple Silicon and Intel) | `Gaza-Man-*-macos-universal.zip`: unzip, move **Gaza Man.app** to Applications, then right-click → **Open** the first time |
-            | Linux (x86_64) | `Gaza-Man-*-linux-x86_64.tar.gz`: extract, then run `./gaza-man` |
+            | Windows 10 / 11 | `Gaza-Man-windows-x86_64.zip`: unzip, then open **Gaza Man.exe** |
+            | macOS 11+ (Apple Silicon and Intel) | `Gaza-Man-macos-universal.zip`: unzip, move **Gaza Man.app** to Applications, then right-click → **Open** the first time |
+            | Linux (x86_64) | `Gaza-Man-linux-x86_64.tar.gz`: extract, then run `./gaza-man` |

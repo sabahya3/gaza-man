@@ -8,7 +8,15 @@ Collections, environments, tests, JavaScript scripts, GraphQL, WebSocket and Soc
 </p>
 
 <p align="center">
-<a href="../../releases/latest"><b>⬇ Download for Windows, macOS and Linux</b></a>
+<a href="https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-windows-x86_64.zip"><img alt="Download for Windows" src="https://img.shields.io/badge/Download_for-Windows-0078D6?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMy40IDkuOCAydjkuNUgwek0xMSAxLjggMjQgMHYxMS41SDExek0wIDEyLjVoOS44VjIyTDAgMjAuNnpNMTEgMTIuNWgxM1YyNGwtMTMtMS44eiIvPjwvc3ZnPg=="></a>
+<a href="https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-macos-universal.zip"><img alt="Download for macOS" src="https://img.shields.io/badge/Download_for-macOS-111111?style=for-the-badge&logo=apple&logoColor=white"></a>
+<a href="https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-linux-x86_64.tar.gz"><img alt="Download for Linux" src="https://img.shields.io/badge/Download_for-Linux-E95420?style=for-the-badge&logo=linux&logoColor=white"></a>
+</p>
+
+<p align="center">
+<a href="https://github.com/sabahya3/gaza-man/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/sabahya3/gaza-man?style=flat-square&label=version"></a>
+<a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-149954?style=flat-square"></a>
+<img alt="Written in Rust" src="https://img.shields.io/badge/made_with-Rust-B7410E?style=flat-square&logo=rust&logoColor=white">
 </p>
 
 <p align="center"><img src="docs/screenshots/01-simple.png" alt="Gaza Man" width="900"></p>
@@ -22,9 +30,9 @@ Collections, environments, tests, JavaScript scripts, GraphQL, WebSocket and Soc
 
 | النظام | الملف | التشغيل |
 |---|---|---|
-| **Windows** 10 / 11 | `Gaza-Man-…-windows-x86_64.zip` | فك الضغط وافتح **Gaza Man.exe** |
-| **macOS** 11+ (Apple Silicon و Intel) | `Gaza-Man-…-macos-universal.zip` | فك الضغط وانقل **Gaza Man.app** لـ Applications. أول مرة اعمل كليك يمين ← **Open**، لأن التطبيق مش موقّع من Apple |
-| **Linux** (x86_64) | `Gaza-Man-…-linux-x86_64.tar.gz` | فك الضغط وشغّل `./gaza-man`. محتاج GTK 3 (موجود في أغلب التوزيعات) |
+| **Windows** 10 / 11 | [`Gaza-Man-windows-x86_64.zip`](https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-windows-x86_64.zip) | فك الضغط وافتح **Gaza Man.exe** |
+| **macOS** 11+ (Apple Silicon و Intel) | [`Gaza-Man-macos-universal.zip`](https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-macos-universal.zip) | فك الضغط وانقل **Gaza Man.app** لـ Applications. أول مرة اعمل كليك يمين ← **Open**، لأن التطبيق مش موقّع من Apple |
+| **Linux** (x86_64) | [`Gaza-Man-linux-x86_64.tar.gz`](https://github.com/sabahya3/gaza-man/releases/latest/download/Gaza-Man-linux-x86_64.tar.gz) | فك الضغط وشغّل `./gaza-man`. محتاج GTK 3 (موجود في أغلب التوزيعات) |
 
 لو Windows طلّع رسالة SmartScreen، اضغط **More info** ← **Run anyway**، لأن البرنامج جديد ومش موقّع.
 
@@ -277,3 +285,9 @@ cargo test
 - **`pm.cookies.jar()`**: فيه `get` و `getAll` و `set` و `unset` و `clear` على الكوكيز الحقيقية بتاعة البرنامج.
 
 لو `pm.environment.set` اتنادى من غير Environment شغال، القيمة بتتحفظ في الـ Globals.
+
+## الرخصة
+
+[MIT](LICENSE): تقدر تستخدم الكود وتعدّل عليه وتوزّعه، بشرط اسم صاحب البرنامج يفضل موجود.
+
+الأيقونات من [Phosphor](https://phosphoricons.com) (رخصة MIT، في [`assets/fonts/Phosphor-LICENSE.txt`](assets/fonts/Phosphor-LICENSE.txt)).
